@@ -8,21 +8,34 @@ function formatDate() {
 function formatDayBefore(date) {
   let day = date.split("-")[2] - 1;
   let month = date.split("-")[1];
-  console.log("Date I am " + day);
+  console.log("Date I am " + typeof day);
   if (day === 0) {
-    let d = new Date();
-    d.setDate(1);
-    d.setMonth(d.getMonth());
-    d.setHours(0, 0, 0, 0);
-    let lastMonthStart = new Date(d);
-    day = lastMonthStart
-      .toISOString()
-      .split("T")[0]
-      .split("-")[2];
-    month = lastMonthStart
-      .toISOString()
-      .split("T")[0]
-      .split("-")[1];
+    let dy = new Date(); // current date
+    dy.setDate(1); // going to 1st of the month
+    dy.setHours(-1);
+    console.log("brand new dare", dy.getMonth() + 1);
+    day = dy.getDate();
+    function pad(num, size) {
+      var s = num + "";
+      while (s.length < size) s = "0" + s;
+      return s;
+    }
+    month = pad(dy.getMonth() + 1, 2);
+    // let d = new Date();
+    // d.setDate(1);
+    // d.setMonth(d.getMonth());
+    // d.setHours(0, 0, 0, 0);
+    // let lastMonthStart = new Date(d);
+    // console.log("Last month date is===> " + lastMonthStart);
+
+    // day = lastMonthStart
+    //   .toISOString()
+    //   .split("T")[0]
+    //   .split("-")[2];
+    // month = lastMonthStart
+    //   .toISOString()
+    //   .split("T")[0]
+    //   .split("-")[1];
   }
   console.log("From the date===> " + day);
 
@@ -170,14 +183,5 @@ app.listen(process.env.PORT || 3000, () => {
   console.log("A day before", formatDayBefore(formatDate()));
   console.log("Today", formatDate());
   console.log("Link UL", linkURL);
-  var x = new Date();
-  console.log(x.setDate(0)); // 0 will result in the last day of the previous month
-  console.log(x.getMonth() + 1);
-  x.setDate(1);
-  let d = new Date();
-  d.setDate(1);
-  d.setMonth(d.getMonth());
-  d.setHours(0, 0, 0, 0);
-  const lastMonthStart = new Date(d);
-  console.log(lastMonthStart);
+  console.log(`${formatDayBefore(formatDate())}`);
 });
