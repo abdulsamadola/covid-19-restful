@@ -8,7 +8,7 @@ function formatDate() {
 function formatDayBefore(date) {
   let day = date.split("-")[2] - 1;
   let month = date.split("-")[1];
-
+  console.log("Date I am " + day);
   if (day === 0) {
     let d = new Date();
     d.setDate(1);
