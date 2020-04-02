@@ -2,6 +2,11 @@ const express = require("express");
 const request = require("request");
 const csv = require("csvtojson");
 const app = express();
+function pad(num, size) {
+  var s = num + "";
+  while (s.length < size) s = "0" + s;
+  return s;
+}
 function formatDate() {
   return new Date().toISOString().split("T")[0];
 }
@@ -14,12 +19,8 @@ function formatDayBefore(date) {
     dy.setDate(1); // going to 1st of the month
     dy.setHours(-1);
     console.log("brand new dare", dy.getMonth() + 1);
-    day = dy.getDate();
-    function pad(num, size) {
-      var s = num + "";
-      while (s.length < size) s = "0" + s;
-      return s;
-    }
+
+    day = pad(dy.getDate(), 3);
     month = pad(dy.getMonth() + 1, 2);
     // let d = new Date();
     // d.setDate(1);
@@ -38,7 +39,7 @@ function formatDayBefore(date) {
     //   .split("-")[1];
   }
   console.log("From the date===> " + day);
-
+  day = pad(day, 2);
   const year = date.split("-")[0];
   const fullDate = `${month}-${day}-${year}`;
   console.log("After every the date===> " + fullDate);
